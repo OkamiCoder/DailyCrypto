@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="OkamiCoder">
+  <meta
+    name="description"
+    content="Live prices and market charts for popular cryptocurrencies."
+  >
+  <meta name="theme-color" content="#080b12">
+  <title>DailyCrypto — Crypto Market</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="min-h-screen">
+    <header class="site-header">
+      <div class="page-shell header-inner">
+        <a class="wordmark" href="#" aria-label="DailyCrypto home">DailyCrypto</a>
+        <span class="live-badge"><span class="live-dot"></span> Live market</span>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">The market, at a glance</p>
+        <h1 id="page-title">Crypto moves.<br><span>Stay in the flow.</span></h1>
+        <p class="hero-copy">
+          Track popular coins and their latest market movements in one place.
+        </p>
+      </section>
+
+      <section class="market-section" aria-labelledby="market-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Market overview</p>
+            <h2 id="market-title">Popular cryptocurrencies</h2>
+          </div>
+          <button
+            class="refresh-button"
+            type="button"
+            @click="fetchCoins"
+            :disabled="loading"
+            aria-label="Refresh cryptocurrency prices"
+          >
+            <span :class="{ 'spin': loading }" aria-hidden="true">↻</span>
+            <span>Refresh</span>
+          </button>
+        </div>
+
+        <p class="status-line" aria-live="polite">
+          <span v-if="loading">Updating market data…</span>
+          <span v-else-if="lastUpdated">Last updated {{ lastUpdated }}</span>
+          <span v-else>Prices in USD · 7-day charts</span>
+        </p>
+
+        <div v-if="error" class="error-panel" role="alert">
+          <strong>Could not load market data.</strong>
+          <span>{{ error }}</span>
+          <button type="button" @click="fetchCoins">Try again</button>
+        </div>
+
+        <div v-else class="coin-list">
+          <article
+            v-for="coin in coins"
+            :key="coin.id"
+            class="coin-card"
+          >
+            <div class="coin-identity">
+              <div class="coin-name-wrap">
+                <h3>{{ coin.name }}</h3>
+                <span class="coin-symbol">{{ coin.symbol.toUpperCase() }}</span>
+              </div>
+            </div>
+
+            <div class="coin-price">
+              <span class="price-label">Price</span>
+              <strong>{{ formatPrice(coin.current_price) }}</strong>
+              <span
+                class="price-change"
+                :class="coin.price_change_percentage_24h >= 0 ? 'positive' : 'negative'"
+              >
+                {{ formatChange(coin.price_change_percentage_24h) }}
+              </span>
+            </div>
+
+            <div class="coin-chart">
+              <span class="chart-label">Last 7 days</span>
+              <svg
+                class="sparkline"
+                viewBox="0 0 160 48"
+                role="img"
+                :aria-label="`${coin.name} price trend over the last 7 days`"
+              >
+                <polyline
+                  :points="chartPoints(coin.sparkline_in_7d?.price)"
+                  fill="none"
+                  :stroke="coin.price_change_percentage_24h >= 0 ? '#36d6a0' : '#ff6b85'"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </article>
+        </div>
+
+        <p class="disclaimer">
+          Market data is provided by CoinGecko and may be delayed. This page is
+          for informational purposes only.
+        </p>
+      </section>
+    </main>
+
+    <footer class="page-shell footer">
+      <span>DailyCrypto</span>
+      <span>Built for the curious.</span>
+    </footer>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
