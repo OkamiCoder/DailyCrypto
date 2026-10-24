@@ -5,6 +5,7 @@
 </p>
 
 A sleek, responsive cryptocurrency dashboard for tracking popular coins, their current USD prices, and recent market trends.
+https://okamicoder.github.io/DailyCrypto/
 
 ## Features
 
