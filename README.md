@@ -1,8 +1,9 @@
 # DailyCrypto
 
 <p>
-   <img src=".assets/banner.png" alt="project banner" width="100%">
+   <img src="./assets/banner.png" alt="project banner" width="100%">
 </p>
+
 A sleek, responsive cryptocurrency dashboard for tracking popular coins, their current USD prices, and recent market trends.
 
 ## Features
