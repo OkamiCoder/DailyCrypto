@@ -46,8 +46,8 @@ https://okamicoder.github.io/DailyCrypto/
 ## Project Files
 
 - `index.html` - page structure and Vue app
-- `style.css` — custom styles and responsive layout
-- `script.js` — API requests, price formatting, and charts
+- `style.css` - custom styles and responsive layout
+- `script.js` - API requests, price formatting, and charts
 
 ## Data Source
 
