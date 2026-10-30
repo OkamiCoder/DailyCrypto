@@ -10,7 +10,7 @@ https://okamicoder.github.io/DailyCrypto/
 
 ## Features
 
-- Live USD prices for Bitcoin, Ethereum, Solana, BNB, and XRP
+- Live USD prices for Bitcoin, Ethereum, Solana, BNB, and XRP/Stellar
 - 24-hour price change indicators
 - Seven-day sparkline charts
 - Manual refresh and automatic updates
