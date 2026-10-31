@@ -22,7 +22,7 @@ https://okamicoder.github.io/DailyCrypto/
 - CSS
 - Tailwind CSS
 - JavaScript
-- Vue 3
+- Vue3
 - CoinGecko API
 
 ## Getting Started
